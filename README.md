@@ -1,4 +1,4 @@
-# JEngineS5
+# JEngineS5 [![License](https://img.shields.io/github/license/JeysDev/JEngineS5?style=flat-square)](https://github.com/JeysDev/JEngineS5/blob/master/LICENSE)
 
 This is a simple 2d engine based on Webgl2
 
@@ -13,7 +13,3 @@ I am planning on adding user contributions, but there is none yet
 ## Author
 
 Everything is done by me (JeysDev)
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
