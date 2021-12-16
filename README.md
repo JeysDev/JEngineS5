@@ -1,6 +1,6 @@
 # JEngineS5 [![License](https://img.shields.io/github/license/JeysDev/JEngineS5?style=flat-square)](https://github.com/JeysDev/JEngineS5/blob/master/LICENSE)
 
-This is a simple 2d engine based on Webgl2
+This is a simple 2d engine based on WebGl2
 
 ## Installation
 
