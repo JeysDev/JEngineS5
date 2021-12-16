@@ -4,7 +4,7 @@ This is a simple 2d engine based on Webgl2
 
 ## Installation
 
-There is not...(yet)
+There is not... (yet)
 
 ## Contributions
 
