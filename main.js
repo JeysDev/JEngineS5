@@ -49,7 +49,7 @@ var Init = function () {
     const gl = WebGL.GetContext();
     console.log(gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
 
-    var cam = new OrthographicCamera(-1, 1, -1, 1);
+    // var cam = new OrthographicCamera(-1, 1, -1, 1);
 
     RenderCommand.SetClearColor(0.75, 0.85, 0.8, 1);
     var vao = new VertexArray();
