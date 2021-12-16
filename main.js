@@ -9,7 +9,7 @@ var vertexShaderText = [
     "void main()",
     "{",
     "  fragColor = vertColor;",
-    "  gl_Position = viewProjection * vec4(vertPosition, 1.0);",
+    "  gl_Position = vec4(vertPosition, 1.0);",
     "}",
 ].join("\n");
 
@@ -29,7 +29,7 @@ var nVertexShaderText = [
 
     "void main()",
     "{",
-    "  gl_Position = viewProjection * vec4(vertPosition, 1.0);",
+    "  gl_Position =  vec4(vertPosition, 1.0);",
     "}",
 ].join("\n");
 
@@ -99,17 +99,17 @@ var Init = function () {
         Renderer.BeginScene();
 
         nShader.Bind();
-        nShader.UploadUniformMat4(
-            "viewProjection",
-            cam.GetViewProjectionMatrix()
-        );
+        //nShader.UploadUniformMat4(
+        //    "viewProjection",
+        //    cam.GetViewProjectionMatrix()
+        //);
         Renderer.Submit(nVa);
 
         shader.Bind();
-        shader.UploadUniformMat4(
-            "viewProjection",
-            cam.GetViewProjectionMatrix()
-        );
+        //shader.UploadUniformMat4(
+        //    "viewProjection",
+        //    cam.GetViewProjectionMatrix()
+        //);
         Renderer.Submit(vao);
 
         Renderer.EndScene();
