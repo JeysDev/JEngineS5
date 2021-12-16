@@ -1,5 +1,3 @@
-//const glm = require("../lib/glm");
-
 class OrthographicCamera {
     #projectionMatrix = 0;
     #viewMatrix = 0;
