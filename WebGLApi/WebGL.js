@@ -1,6 +1,10 @@
 class WebGL {
     static #context = 0;
-
+ /**
+ * Initializes the WebGL context
+ * @param {String} canvas
+ * @param {String} WebGLContext
+ */
     static Init(canvas, WebGLContext = "webgl2") {
         /** @type {CanvasRenderingContext2D} */
         var canvas = document.getElementById(canvas);
@@ -29,6 +33,10 @@ class WebGL {
         WebGL.#context = glCtx;
         _WEB_GL_RENDERING_CONTEXT = WebGL.#context;
     }
+    
+ /**
+ * Public getter for the WebGL context (use not recommended)
+ */
     static GetContext() {
         return WebGL.#context;
     }
