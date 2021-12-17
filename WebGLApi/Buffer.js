@@ -1,4 +1,10 @@
 class BufferElement {
+    /**
+ * Constructor for the buffer element
+ * @param {ShaderDataType} type
+ * @param {String} name
+ * @param {Bool} normalized
+ */
     constructor(type, name, normalized = false) {
         this.type = type;
         this.name = name;
@@ -6,6 +12,9 @@ class BufferElement {
         this.offset = 0;
         this.normalized = normalized;
     }
+      /**
+ * Returns the number of components of the current type
+ */
     GetComponentCount() {
         switch (this.type) {
             case ShaderDataType.Float:
@@ -36,6 +45,10 @@ class BufferElement {
 class BufferLayout {
     #elements = [];
     #stride = 0;
+    /**
+    * Constructor for the buffer layout
+    * @param {BufferElement[]} elements
+    */
     constructor(elements) {
         this.#elements = elements;
         this.#CalculateOffsetAndStride();
@@ -48,30 +61,27 @@ class BufferLayout {
             offset += element.size;
             this.#stride += element.size;
         });
-    }
+    }/**
+    * Getter for the elements of the buffer
+    */
     GetElements() {
         return this.#elements;
     }
+    /**
+    * Getter for the stride float
+    */
     GetStride() {
         return this.#stride;
     }
 }
-
-class VertexBuffer {
+class Buffer{
     #rendererID = 0;
-    #layout = 0;
+    constructor(target ){
 
-    constructor(vertices) {
         this.#rendererID = _WEB_GL_RENDERING_CONTEXT.createBuffer();
         _WEB_GL_RENDERING_CONTEXT.bindBuffer(
-            _WEB_GL_RENDERING_CONTEXT.ARRAY_BUFFER,
+            target,
             this.#rendererID
-        );
-
-        _WEB_GL_RENDERING_CONTEXT.bufferData(
-            _WEB_GL_RENDERING_CONTEXT.ARRAY_BUFFER,
-            new Float32Array(vertices),
-            _WEB_GL_RENDERING_CONTEXT.DYNAMIC_DRAW
         );
     }
 
@@ -90,6 +100,23 @@ class VertexBuffer {
         _WEB_GL_RENDERING_CONTEXT.bindBuffer(
             _WEB_GL_RENDERING_CONTEXT.ARRAY_BUFFER,
             null
+        );
+    }
+}
+
+class VertexBuffer extends Buffer {
+    #layout = 0;
+
+    /**
+    * Initializes the buffer and binds the data
+    * @param {Float[]} vertices
+    */
+    constructor(vertices) {
+        super(_WEB_GL_RENDERING_CONTEXT.ARRAY_BUFFER);
+        _WEB_GL_RENDERING_CONTEXT.bufferData(
+            _WEB_GL_RENDERING_CONTEXT.ARRAY_BUFFER,
+            new Float32Array(vertices),
+            _WEB_GL_RENDERING_CONTEXT.DYNAMIC_DRAW
         );
     }
 
@@ -101,39 +128,22 @@ class VertexBuffer {
     }
 }
 /* Also known as Element Array Buffer */
-class IndexBuffer {
+class IndexBuffer extends Buffer{
     #rendererID = 0;
     #count = 0;
-
+/**
+    * Initializes the buffer and binds the data
+    * @param {Int[]} indices
+    * @param {Int} count
+    */
     constructor(indices, count) {
+        super(_WEB_GL_RENDERING_CONTEXT.ELEMENT_ARRAY_BUFFER);
         this.#count = count;
-        this.#rendererID = _WEB_GL_RENDERING_CONTEXT.createBuffer();
 
-        _WEB_GL_RENDERING_CONTEXT.bindBuffer(
-            _WEB_GL_RENDERING_CONTEXT.ELEMENT_ARRAY_BUFFER,
-            this.#rendererID
-        );
         _WEB_GL_RENDERING_CONTEXT.bufferData(
             _WEB_GL_RENDERING_CONTEXT.ELEMENT_ARRAY_BUFFER,
             new Uint16Array(indices),
             _WEB_GL_RENDERING_CONTEXT.STATIC_DRAW
-        );
-    }
-    Delete() {
-        _WEB_GL_RENDERING_CONTEXT.deleteBuffer(this.#rendererID);
-    }
-
-    Bind() {
-        _WEB_GL_RENDERING_CONTEXT.bindBuffer(
-            _WEB_GL_RENDERING_CONTEXT.ELEMENT_ARRAY_BUFFER,
-            this.#rendererID
-        );
-    }
-
-    Unbind() {
-        _WEB_GL_RENDERING_CONTEXT.bindBuffer(
-            _WEB_GL_RENDERING_CONTEXT.ELEMENT_ARRAY_BUFFER,
-            null
         );
     }
 
